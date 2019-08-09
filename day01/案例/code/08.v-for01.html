@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for的使用</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--1.对普通的 数组列表轮询-->
+        <p v-for="(item,key) in list">第{{key}}项 值为：{{ item }}</p>
+        <ul>
+            <!--对对象数组进行轮询-->
+            <li v-for="item in obList">{{item.name}}</li>
+            <li v-for="(item,index) in obList">{{index}} {{item.name}}</li>
+        </ul>
+        <ul>
+            <!--3.对对象轮询-->
+            <li v-for="(item,key,i) in userInfo">{{key}} {{i}} {{item}}</li>
+        </ul>
+        <ul>
+            <!--4.对数字进行轮询-->
+            <li v-for="count in 10">{{count}}</li>
+        </ul>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                list:[
+                    1,2,3,4,5,6
+                ],
+                obList:[
+                    {id:1,name:'zhangsan'},
+                    {id:2,name:'zhangsan2'},
+                    {id:3,name:'zhangsan3'},
+                    {id:4,name:'zhangsan4'},
+                    {id:5,name:'zhangsan5'},
+                ],
+                userInfo:{
+                    id:1,
+                    name:'超人',
+                    sex:'M'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跑马灯</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="浪起来" @click="lang">
+        <input type="button" value="停止" @click="stop">
+        <h4 v-text="msg"> </h4>
+    </div>
+    <script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            msg:'小花猫，别浪了~~~~~',
+            intervalID:null
+        },
+        methods: {
+            lang(){
+               /* 
+                //获取第一个字母
+                var start=this.msg.substring(0,1);
+                //获取后面的字符
+                var end=this.msg.substring(1);
+                //拼接
+                this.msg=end+start;
+                */
+               //如果定时器还在运行中就不要再开启
+               if(this.intervalID!=null) return 
+               this.intervalID=setInterval(() => {
+                var start=this.msg.substring(0,1);
+                var end=this.msg.substring(1);
+                this.msg=end+start;
+               }, 400);
+
+            },
+            stop(){
+                //停止定时器
+                clearInterval(this.intervalID);
+                //还原定时器
+                this.intervalID=null
+            }
+        },
+    })
+    //分析
+    //1.实现 按钮 让字符串 走起来 v-on事件  来触发
+    //2.在按钮的事件中，写相关 逻辑代码：先拿到msg,然后调用字符串函数substring进行字符串截取
+    //把第一个字符串截取出来，放到最后一个位置即可
+
+    </script>
+    
+</body>
+</html> 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on的学习</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--原生JS实现时间响应-->
+        <input type="button" value="原生JS按钮" onclick="clickHandler()">
+        <!--使用Vue实现-->
+        <input type="button" value="Vue按钮" v-on:click="sayHello">
+       <!--v-on的简写@event-->
+        <input type="button" value="Vue按钮" @click="sayHello">
+        <input type="button" value="Vue按钮" @mouseover="sayHello">
+    </div>
+    <script>
+        function clickHandler(){
+
+        }
+        var vm=new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods: {
+                sayHello:function(){
+                    alert('hello')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+<!--总结
+1.如何定义一个基本的Vue 代码结构
+2.插值表达式和v-text
+3.v-cloak的使用
+4.v-html解决元素标签绑定
+5.v-bind属性绑定 简写方式：
+6.v-on 事件绑定机制 简写 @
+
+-->

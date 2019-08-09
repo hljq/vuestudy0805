@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for 优化</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+           id: <input type="text" v-model="userId" >
+           name: <input type="text" v-model="userName">
+           <input type="button" value="添加" @click="add">
+        </div>
+        <!--为了给 Vue 一个提示，以便它能跟踪每个节点的身份，
+            从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性：,其中数据的id不能重复-->
+        <p v-for="(item,index) in listArray" v-bind:key="item.id">
+            <input type="checkbox" >
+            {{item.id}}---{{item.name}}
+        </p>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                userId:0,
+                userName:'',
+                listArray:[
+                    {id:1,name:'李斯'},
+                    {id:2,name:'王五'},
+                    {id:3,name:'赵六'},
+                    {id:4,name:'张三'},
+                    {id:5,name:'李四'}
+                ]
+            },
+            methods: {
+                add(){
+                //    this. listArray.push({
+                //        id:this.userId,
+                //        name:this.userName
+                //    })
+                    this. listArray.unshift({
+                       id:this.userId,
+                       name:this.userName
+                   })
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件修饰符</title>
+    <script src="./lib/vue.js"></script>
+    <style type="text/css">
+    .inner{
+        background: gray;
+        height: 200px;
+    }
+    .outer{
+        padding: 30px;
+        background-color: pink;
+    }
+    </style>
+</head>
+<body>
+    <!--事件修饰符格式：@event.modifier
+    .stop阻止冒泡
+    .prevent阻止默认事件
+    .capture实现捕获
+    .self只当事件应用在元素本身  才会触发事件
+    .once事件只触发一次
+    -->
+    <div id="app">
+         <!--1.使用.stop阻止冒泡-->
+        <div class="inner" v-on:click="divHandle">
+            <input type="button" value="戳它" @click.stop="btnHandle">
+        </div>
+        <!--2.使用.prevent阻止默认事件-->
+        <a href="http://www.baidu.com"  @click.prevent="linkHandle">百度</a>
+        <!--3.capture-->
+        <div class="inner" v-on:click.capture="divHandle">
+            <input type="button" value="戳它" @click="btnHandle">
+        </div>
+        <!--4.self-->
+        <div class="inner" v-on:click.self="divHandle">
+                <input type="button" value="戳它" @click="btnHandle">
+        </div>
+        <div class="outer" @click="outerHandle">
+                <div class="inner" v-on:click.self="divHandle">
+                        <input type="button" value="戳它" @click="btnHandle">
+                </div>
+        </div>
+        <!--5.once-->
+        <a href="http://www.baidu.com"  @click.prevent.once="linkHandle">百度</a>
+        
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods: {
+                btnHandle(){
+                    console.log("这是触发了btn的点击事件")
+                },
+                divHandle(){
+                    console.log("这是触发了div的点击事件")
+                },
+                linkHandle(){
+                    console.log("这是触发了a的点击事件")
+                },
+                outerHandle(){
+                    console.log("这是触发了outer的点击事件")
+                }
+            },
+        })
+    </script>
+</body>
+</html>
